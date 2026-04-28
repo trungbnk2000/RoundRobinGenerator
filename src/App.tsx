@@ -207,7 +207,7 @@ export function App() {
         </button>
       </header>
 
-      <main className="app-shell">
+      <main className={stage === "results" ? "app-shell app-shell-results" : "app-shell"}>
         {errors.length > 0 ? (
           <div className="alert" role="alert">
             {errors.map((error) => (
@@ -441,7 +441,14 @@ export function App() {
                   <div className="leader-stats">
                     <span>{row.wins}T</span>
                     <span>{row.losses}B</span>
-                    <span>{row.pointDifferential >= 0 ? "+" : ""}{row.pointDifferential}</span>
+                    <span className={row.pointDifferential < 0 ? "leader-diff negative" : "leader-diff"}>
+                      <small>Hiệu số</small>
+                      {row.pointDifferential >= 0 ? "+" : ""}{row.pointDifferential}
+                    </span>
+                    <span className="leader-points">
+                      <small>Điểm T/B</small>
+                      {row.pointsFor}/{row.pointsAgainst}
+                    </span>
                   </div>
                 </article>
               ))}
@@ -499,10 +506,13 @@ export function App() {
                       <div className="result-badges">
                         <span>{row.wins} thắng</span>
                         <span>{row.losses} thua</span>
-                        <span>{row.matchesPlayed} trận</span>
                       </div>
                     </div>
-                    <div className="result-diff">
+                    <div className="result-points">
+                      <strong>{row.pointsFor}/{row.pointsAgainst}</strong>
+                      <span>Điểm T/B</span>
+                    </div>
+                    <div className={row.pointDifferential < 0 ? "result-diff result-diff-negative" : "result-diff"}>
                       <strong className={row.pointDifferential < 0 ? "negative" : ""}>
                         {diffLabel}
                       </strong>

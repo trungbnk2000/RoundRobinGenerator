@@ -38,6 +38,11 @@ button {
   padding: 80px 16px 48px;
 }
 
+.app-shell-results {
+  padding-top: 68px;
+  padding-bottom: 24px;
+}
+
 .topbar {
   position: fixed;
   top: 0;
@@ -781,12 +786,40 @@ button:focus-visible {
 }
 
 .leader-stats {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  align-items: center;
   gap: 8px;
   color: #111827;
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
+}
+
+.leader-diff,
+.leader-points {
+  display: grid;
+  gap: 1px;
+  text-align: right;
+}
+
+.leader-diff {
+  color: #10b981;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+
+.leader-diff.negative {
+  color: #ef4444;
+}
+
+.leader-diff small,
+.leader-points small {
+  color: #9ca3af;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .final-panel {
@@ -801,7 +834,7 @@ button:focus-visible {
 }
 
 .results-page {
-  width: min(100%, 768px);
+  width: min(100%, 720px);
   margin: 0 auto;
 }
 
@@ -810,21 +843,27 @@ button:focus-visible {
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
+}
+
+.results-heading .secondary-button {
+  min-height: 36px;
+  padding: 8px 14px;
+  font-size: 13px;
 }
 
 .results-heading h1 {
   margin: 0;
   color: #141b2b;
   font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.005em;
+  line-height: 1.2;
+  letter-spacing: 0;
 }
 
 .results-heading p {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   color: #6b7280;
   font-size: 14px;
   line-height: 1.5;
@@ -833,33 +872,27 @@ button:focus-visible {
 .results-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .result-row {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) minmax(86px, auto) minmax(82px, auto);
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   min-width: 0;
   overflow: hidden;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 8px;
+  padding: 10px 12px;
   background: #ffffff;
 }
 
-.result-row:nth-child(n + 4) {
-  opacity: 0.9;
-}
-
-.result-row:nth-child(n + 6) {
-  opacity: 0.8;
-}
-
 .result-row-top {
-  padding-left: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-color: rgba(16, 185, 129, 0.35);
+  padding-left: 12px;
+  background: #fbfffd;
 }
 
 .winner-bar {
@@ -874,29 +907,23 @@ button:focus-visible {
 .result-rank {
   width: 32px;
   height: 32px;
-  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9999px;
+  border-radius: 6px;
   color: #3c4a42;
-  background: #dce2f7;
+  background: #edf1f7;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 14px;
   font-weight: 700;
 }
 
 .result-rank-top {
-  width: 40px;
-  height: 40px;
   color: #ffffff;
   background: #10b981;
-  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 18px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .result-main {
-  flex: 1 1 auto;
   min-width: 0;
 }
 
@@ -907,60 +934,85 @@ button:focus-visible {
   font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 18px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.25;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .result-row:not(.result-row-top) .result-main h3 {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
 }
 
 .result-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 2px;
 }
 
 .result-badges span {
   color: #6b7280;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 13px;
+  line-height: 1.2;
 }
 
 .result-row-top .result-badges span {
-  border-radius: 9999px;
-  padding: 2px 8px;
+  border-radius: 6px;
+  padding: 1px 6px;
   color: #141b2b;
   background: #e9edff;
 }
 
+.result-points,
 .result-diff {
-  flex: 0 0 auto;
   text-align: right;
 }
 
+.result-points strong,
 .result-diff strong {
   display: block;
-  color: #10b981;
   font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.result-diff {
+  border-radius: 6px;
+  padding: 6px 8px;
+  background: #ecfdf5;
+}
+
+.result-diff strong {
+  color: #10b981;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.result-points strong {
+  color: #141b2b;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
 .result-diff strong.negative {
   color: #ef4444;
 }
 
+.result-diff-negative {
+  background: #fef2f2;
+}
+
+.result-points span,
 .result-diff span {
   display: block;
+  margin-top: 2px;
   color: #9ca3af;
   font-size: 12px;
-  line-height: 1.4;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .sr-only {
@@ -975,9 +1027,66 @@ button:focus-visible {
   border: 0;
 }
 
+@media (max-width: 520px) {
+  .results-heading {
+    align-items: center;
+  }
+
+  .results-heading h1 {
+    font-size: 20px;
+  }
+
+  .results-heading p {
+    font-size: 12px;
+  }
+
+  .results-heading .secondary-button {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .result-row {
+    grid-template-columns: 28px minmax(0, 1fr) minmax(76px, auto) minmax(66px, auto);
+    gap: 6px;
+    padding: 9px 8px;
+  }
+
+  .result-rank {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .result-main h3,
+  .result-row:not(.result-row-top) .result-main h3 {
+    font-size: 16px;
+  }
+
+  .result-badges span {
+    font-size: 11px;
+  }
+
+  .result-diff {
+    padding: 5px 6px;
+  }
+
+  .result-diff strong {
+    font-size: 26px;
+  }
+
+  .result-points strong {
+    font-size: 19px;
+  }
+}
+
 @media (min-width: 640px) {
   .app-shell {
     padding-top: 80px;
+  }
+
+  .app-shell-results {
+    padding-top: 68px;
   }
 
   .player-grid,
